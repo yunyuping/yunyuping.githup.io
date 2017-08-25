@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        html,body{
+            height: 100%;
+            margin: 0;
+            font-family: "苹方", "微软雅黑", "Helvetica";
+        }
+        .main{
+            width: 1000px;
+            height: 100%;
+            margin: 0 auto;
+        }
+        .left{
+            width: 800px;
+            height: 100%;
+            float: left;
+            background: #FFE792;
+            position: relative;
+            background-image: url("img/16666.jpg");
+            background-repeat: no-repeat;
+            background-size: 800px 100%;
+        }
+        .right{
+            width: 200px;
+            height: 100%;
+            float: left;
+            background: #63a35c;
+            background-image: url("img/dong.jpg");
+            background-repeat: no-repeat;
+            background-position: 0 460px;
+        }
+        .title{
+            width: 180px;
+            height: 40px;
+            margin: 30px auto;
+            text-align: center;
+        }
+        .name{
+            line-height: 20px;
+            color: #000;
+            border: 1px solid #FFE792;
+        }
+        .con{
+            line-height: 20px;
+            background: #fff;
+            color: red;
+        }
+        .start,.end{
+            width: 180px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background: #fff;
+            color: #000;
+            margin: 30px 10px;
+            border: 0;
+            font-size: 20px;
+        }
+        .letter{
+            width: 80px;
+            height: 80px;
+            text-align: center;
+            line-height: 80px;
+            border: 3px solid #6CCAB8;
+            font-size: 32px;
+            font-weight: bold;
+            color: #6CCAB8;
+            border-radius: 10px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="left"></div>
+        <div class="right">
+            <div class="title">
+                <div class="name">得分</div>
+                <div class="con" id="scor">0</div>
+            </div>
+            <div class="title">
+                <div class="name">关卡</div>
+                <div class="con" id="state">1</div>
+            </div>
+            <div class="title">
+                <div class="name">生命值</div>
+                <div class="con" id="life">5</div>
+            </div>
+            <input type="button" class="start" value="开始">
+            <input type="button" class="end" value="暂停">
+        </div>
+    </div>
+</body>
+<script>
+    let start=document.querySelector(".start");
+    let left=document.querySelector(".left");
+    let scor=document.querySelector("#scor");
+    let state=document.querySelector("#state");
+    let life=document.querySelector("#life");
+
+    class Game{
+        constructor(left,scor,state,life){
+            this.left=left;
+            this.scor=scor;
+            this.scornum=0;
+            this.state=state;
+            this.statenum=1;
+            this.life=life;
+            this.lifenum=5;
+            this.num=3;
+            this.obj={};
+            this.flag=true;
+            this.speed=5;
+            this.height=window.innerHeight;
+        }
+        start(){
+            for(var i=0;i<this.num;i++){
+                this._creatLetter();
+            }
+            this._move();
+            this._keydown();
+        }
+        _creatLetter(){
+            let newdiv=document.createElement("div");
+            newdiv.className="letter";
+
+            //判断字母重复
+            do {
+                let randomNum = Math.floor(Math.random() * 26 + 65);
+                var randomLetter = String.fromCharCode(randomNum);
+            }while(this.obj[randomLetter]);//判断是否有randomletter这个字母
+            //
+
+            //判断位置重复，重复再循环
+            do {
+                var randomLeft = Math.random() * 720;
+            }while (this._checkLetter(randomLeft));
+
+            //保存，添加属性，以对象形式保存randomleft值
+            this.obj[randomLetter]={left:randomLeft,ele:newdiv};
+
+            newdiv.style.left=randomLeft+"px";
+
+            let randomTop=-Math.random()*300;
+            newdiv.style.top=randomTop+"px";
+
+            newdiv.innerHTML=randomLetter;
+
+            this.left.appendChild(newdiv);
+        }
+        _checkLetter(left){
+            for(let i in this.obj){
+                if(left>this.obj[i].left-80&&left<this.obj[i].left+80){
+                    return true;
+                }
+            }
+        }
+
+        _move(){
+            setInterval(function () {
+                for(let i in this.obj){
+                    let top=this.obj[i].ele.offsetTop;
+                    top+=this.speed;
+                    this.obj[i].ele.style.top=top+"px";
+                    if(top>this.height){
+                        this.lifenum--;
+                        this.life.innerHTML=this.lifenum;
+                        this.left.removeChild(this.obj[i].ele);
+                        delete this.obj[i];
+                        this._creatLetter();
+                        if(this.lifenum==0){
+                            this._gameover();
+                        }
+                    }
+                }
+            }.bind(this),60);//bind方法改变this的指向
+        }
+
+        _keydown(){
+            document.onkeydown=function (e) {
+                let kc=e.keyCode;
+                let letter=String.fromCharCode(kc);
+                if(this.obj[letter]){
+                    this.left.removeChild(this.obj[letter].ele);
+                    delete this.obj[letter];
+                    this._creatLetter();
+                    this.scornum++;
+                    this.scor.innerHTML=this.scornum;
+                    if(this.scornum%10===0){
+                        this._upstate();
+                    }
+                }
+            }.bind(this);
+        };
+
+        _upstate(){
+            this.statenum++;
+            this.state.innerHTML=this.statenum;
+            if(this.statenum<3){
+                this._creatLetter();
+            }else {
+                this.speed++;
+            }
+        }
+
+        _gameover(){
+            alert(`游戏结束，得分${this.scornum}`);
+            this.left.innerHTML="";
+            this.obj={};
+            this.scornum=0;
+            this.scor.innerHTML=0;
+            this.statenum=1;
+            this.state.innerHTML=1;
+            this.lifenum=5;
+            this.life.innerHTML=5;
+            clearInterval(this.st);
+            this.flag=true;
+        }
+
+
+    }
+    let game=new Game(left,scor,state,life);
+    let flag=true;
+    start.onclick=function () {
+       if(game.flag){
+           game.flag=false;
+           game.start();
+//           this.style.color="#ccc";
+       }
+    }
+
+
+</script>
+</html>

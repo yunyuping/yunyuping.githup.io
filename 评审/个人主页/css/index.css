@@ -1,0 +1,260 @@
+*{
+    margin:0;
+    padding:0;
+    font-family: "微软雅黑";
+    list-style: none;
+    text-decoration: none;
+    font-size: 12px;
+}
+.html,body{
+    background: #fff;
+}
+.header{
+    width:100%;
+    height:500px;
+    background-image: url("../img/one.jpg");
+    background-size: 100% 500px;
+    border-top: 1px solid #010101;
+}
+.header .head{
+    width:60%;
+    height:100px;
+    margin:0 auto;
+    margin-top: 60px;
+    transition: all 1s;
+}
+.header .head h1{
+    color:#fff;
+    font-size: 80px;
+    font-family: "隶书";
+    text-align: center;
+    transition: all 1s;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+.header .head h1:hover{
+    color:#EA5F8D;
+}
+.header .head .opj{
+    width:100%;
+    height:300px;
+    border-radius: 50%;
+    background:#4C4C4C;
+    opacity: 0.5;
+}
+.header .head .opj h2{
+    text-align: center;
+    color: #EAE3DB;
+    font-size: 30px;
+    font-family: "平方";
+    margin-bottom: 20px;
+}
+.header .head .opj h3{
+    margin-top: 10px;
+    color: #F8F9F9;
+    text-align: center;
+    font-size: 25px;
+}
+.header .head .opj h3 span{
+    color: #dbf1d4;
+    font-size: 25px;
+    font-family: "华文仿宋";
+    margin-left: 30px;
+}
+.jineng{
+    width:92%;
+    height: 60px;
+    margin:0 auto;
+    /*background:green;*/
+}
+.jineng h1{
+    color:#000;
+    font-size: 30px;
+    line-height: 60px;
+    font-family: 华文仿宋;
+}
+.zhiyejineng{
+    width:90%;
+    height:350px;
+    border:3px solid #000;
+    margin:0 auto;
+}
+
+.zhiyejineng ul{
+    width:100%;
+    height:100px;
+    margin-top: 20px;
+    float: left;
+}
+.zhiyejineng ul li{
+    width:230px;
+    height:100px;
+    float: left;
+    margin-left: 50px;
+    text-align: center;
+    color:#000;
+    font-size:30px;
+    font-family: 华文仿宋;
+    cursor: pointer;
+}
+.zhiyejineng canvas{
+    display: block;
+    float: left;
+    margin-left: 40px;
+}
+.zhiyejineng canvas:nth-child(1){
+    margin-left: 70px;
+}
+.zhiyejineng ul li:nth-child(1):hover{
+    color:red;
+}
+.zhiyejineng ul li:nth-child(2):hover{
+    color:blue;
+}
+.zhiyejineng ul li:nth-child(3):hover{
+    color:yellow;
+}
+.zhiyejineng ul li:nth-child(4):hover{
+    color:green;
+}
+
+.zp{
+    width:90%;
+    height: 60px;
+    margin:0 auto;
+    line-height: 60px;
+    margin-top: 10px;
+}
+.zp h1{
+    color:#000;
+    font-size: 30px;
+
+    font-family: 华文仿宋;
+}
+.my{
+    width:90%;
+    height:60px;
+    margin: 0 auto;
+}
+.my h1{
+    line-height: 60px;
+    color: #000;
+    font-size: 30px;
+    font-family: "华文仿宋";
+}
+.hou{
+    width:100%;
+    height:300px;
+    background: #dbf1d4;
+    border-top: 1px solid #fff;
+    border-radius: 100px;
+    position: relative;
+}
+.hou .left{
+    width: 300px;
+    height:280px;
+    border: 1px solid #fff;
+    float: left;
+    margin-left: 150px;
+    transition: all 1s;
+}
+.hou .left:hover{
+    border:5px solid #ccc;
+    /*border-bottom: 15px solid #ccc;*/
+}
+.hou .left span{
+    display: block;
+    width:260px;
+    height:50px;
+    margin-top: 20px;
+    color: #000;
+    font-size: 20px;
+
+}
+.out {
+    width: 220px;
+    height: 220px;
+    background: linear-gradient(to bottom, #333 0, #333 50%, #666 100%);
+    margin: 0 auto;
+    border-radius: 50%;
+    margin-top: 35px;
+}
+.hou .ic{
+    width:60px;
+    height:60px;
+    background: #ccc;
+    border-radius: 10px;
+    position: absolute;
+    right: 400px;
+    top:120px;
+}
+.hou .ic span{
+    margin-left: 6px;
+    line-height: 55px;
+    font-size: 60px;
+    font-weight: 200;
+}
+.hou .ic:hover{
+    display: none;
+}
+.hou .right{
+    width:10px;
+    height:299px;
+    background: #ccc;
+    float: right;
+    position: absolute;
+    right: 400px;
+    top:0;
+    transition: all 1s;
+    overflow: hidden;
+}
+.hou .right:hover{
+    width:500px;
+}
+.hou .right h3{
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 20px;
+    margin-top: 20px;
+}
+.hou .right span{
+    display: block;
+    width: 400px;
+    height:300px;
+    margin: 0 auto;
+    text-align: center;
+}
+.hou .lianxi{
+    width:260px;
+    height:300px;
+    position: absolute;
+    right: 100px;
+    top:0;
+}
+.hou .lianxi h4{
+    font-size: 30px;
+    text-align: center;
+    font-family: 华文隶书;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.hou .lianxi span{
+    display: block;
+    width:260px;
+    height:30px;
+    font-size: 20px;
+    margin-top: 10px;
+    color: #ccc;
+
+}
+.inner{
+    width:200px;
+    height:200px;
+    background:#fff;
+    border-radius: 50%;
+    margin:10px;
+    float: left;
+    /*transform-origin:220px 220px;*/
+    /*transform:rotate(45deg);*/
+    position: relative;
+}
